@@ -31,8 +31,12 @@ class Post(models.Model):
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
     updated = models.DateTimeField(verbose_name=_('updated'), auto_now=True)
     status = models.CharField(verbose_name=_('status'), max_length=15, choices=POST_STATUS, default='draft')
-    publish_time = models.DateTimeField(verbose_name=_('publish time'), null=True,blank=True)
+    featured = models.BooleanField(verbose_name=_('featured'), null=True, default=False)
+    publish_time = models.DateTimeField(verbose_name=_('publish time'), null=True, blank=True)
     slug = models.SlugField(verbose_name=_('slug'), allow_unicode=True, null=False, unique_for_date='publish_time')
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = _('post')
