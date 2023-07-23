@@ -28,6 +28,7 @@ class Post(models.Model):
     lead = models.CharField(verbose_name=_('lead'), max_length=1024, null=True, blank=True)
     body = models.TextField(verbose_name=_('body'), )
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    thumbnail = models.ImageField(verbose_name=_('thumbnail'), upload_to='thumbnails', default='thumbnail.png')
     created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
     updated = models.DateTimeField(verbose_name=_('updated'), auto_now=True)
     status = models.CharField(verbose_name=_('status'), max_length=15, choices=POST_STATUS, default='draft')
