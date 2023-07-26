@@ -52,3 +52,16 @@ class Post(models.Model):
         verbose_name = _('post')
         verbose_name_plural = _('posts')
         ordering = ['-publish_time']
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    body = models.TextField()
+    approved = models.BooleanField(default=False)
+    created = models.DateTimeField(verbose_name=_('created'), auto_now_add=True)
+    updated = models.DateTimeField(verbose_name=_('updated'), auto_now=True)
+
+    def __str__(self):
+        return f'{self.name}  | {self.post}'
